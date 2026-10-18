@@ -1,0 +1,54 @@
+{
+  "name": "moshu-office-agent",
+  "productName": "墨枢 Office Agent",
+  "version": "1.0.0",
+  "description": "墨枢 · 面向 Agent 的桌面办公工作台：多格式文档、方片画布、AI 生成与本地 CLI 桥接",
+  "type": "module",
+  "main": "electron/main.mjs",
+  "bin": {
+    "oa": "cli/oa.mjs"
+  },
+  "author": "Moshu Studio",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite --port 5173 --strictPort",
+    "app": "electron .",
+    "app:dev": "concurrently -k \"npm:dev\" \"wait-for-vite\"",
+    "wait-for-vite": "node electron/wait.mjs",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && electron-packager . \"Moshu Office Agent\" --platform=win32 --arch=x64 --out=release --overwrite --asar --icon=build/icon.ico --ignore=\"^/(src|scripts|release|\\.git|\\.chrome.*)\" --ignore=\"^/(preview|board-|electron-|ui-|video-|crop-|dev\\.log|electron\\.log|electron\\.err|oa\\.cmd|启动墨枢\\.bat)\" --ignore=\"\\.map$\" --ignore=\"^/cli\"",
+    "cli": "node cli/oa.mjs"
+  },
+  "dependencies": {
+    "docx": "^9.0.3",
+    "dompurify": "^3.2.0",
+    "fix-webm-duration": "^1.0.6",
+    "html2canvas": "^1.4.1",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.460.0",
+    "mammoth": "^1.8.0",
+    "marked": "^14.1.3",
+    "nanoid": "^5.0.8",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.8.69",
+    "pptxgenjs": "^3.12.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "ws": "^8.22.0",
+    "xlsx": "^0.18.5",
+    "yaml": "^2.6.0",
+    "zustand": "^5.0.1"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.3.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  }
+}
